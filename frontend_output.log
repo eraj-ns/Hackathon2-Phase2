@@ -1,0 +1,32 @@
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /mnt/e/Hackathon2_Todo_App/Phase_2/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /mnt/e/Hackathon2_Todo_App/Phase_2/frontend/package-lock.json
+
+▲ Next.js 16.1.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://172.31.181.136:3000
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 10.7s
+○ Compiling / ...
+⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ HEAD / 200 in 5.5s (compile: 4.7s, render: 837ms)
+⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 750ms (compile: 457ms, render: 293ms)
+○ Compiling /signin ...
+⚠ Unsupported metadata viewport is configured in metadata export in /signin. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET /signin 200 in 4.6s (compile: 4.2s, render: 380ms)
+○ Compiling /dashboard ...
+⚠ Unsupported metadata viewport is configured in metadata export in /dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET /dashboard 200 in 7.8s (compile: 7.3s, render: 470ms)
+⚠ Unsupported metadata viewport is configured in metadata export in /dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET /dashboard 200 in 221ms (compile: 84ms, render: 138ms)
