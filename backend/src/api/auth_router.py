@@ -15,8 +15,11 @@ from ..dependencies import SECRET_KEY, ALGORITHM
 
 router = APIRouter()
 
-# Password hashing - configure to use a working backend
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto", bcrypt__ident="2b", bcrypt__rounds=12)
+# Password hashing - use pbkdf2 which is more reliable on Windows
+pwd_context = CryptContext(
+    schemes=["pbkdf2_sha256"],
+    deprecated="auto"
+)
 
 
 class SignUpRequest(BaseModel):
@@ -37,14 +40,20 @@ class TokenResponse(BaseModel):
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verify a plain password against a hashed password."""
-    return pwd_context.verify(plain_password, hashed_password)
+    if not hashed_password:
+        return False
+    try:
+        return pwd_context.verify(plain_password, hashed_password)
+    except Exception:
+        return False
 
 
 def get_password_hash(password: str) -> str:
     """Hash a plain password."""
-    # Truncate password to 72 bytes to comply with bcrypt limitations
-    truncated_password = password[:72] if len(password) > 72 else password
-    return pwd_context.hash(truncated_password)
+    # Ensure password is not longer than 72 bytes for bcrypt
+    if len(password) > 72:
+        password = password[:72]
+    return pwd_context.hash(password)
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):

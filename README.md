@@ -1,14 +1,21 @@
-# Todo Full-Stack Web Application
+# Todo App Backend
 
-This is a secure, multi-user todo application with JWT-based authentication and user data isolation.
+This is the backend for the Todo App with authentication and task management features.
 
-## Tech Stack
+## Environment Variables Required
 
-- **Frontend**: Next.js 16+ (App Router)
-- **Backend**: Python FastAPI
-- **ORM**: SQLModel
-- **Database**: Neon Serverless PostgreSQL
-- **Authentication**: Better Auth with JWT tokens
+- `DATABASE_URL`: Your Neon PostgreSQL database connection string
+- `AUTH_SECRET`: Secret key for JWT token generation
+
+## Endpoints
+
+- `/auth/signup` - User registration
+- `/auth/signin` - User login
+- `/api/tasks/` - Task management endpoints
+
+## Framework
+
+Built with FastAPI and SQLModel, connected to Neon PostgreSQL database.
 
 ## Setup Instructions
 

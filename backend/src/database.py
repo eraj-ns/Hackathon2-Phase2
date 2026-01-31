@@ -1,6 +1,7 @@
 from sqlmodel import create_engine, Session
 import os
 
+
 # Get database URL from environment variable
 DATABASE_URL = os.getenv("DATABASE_URL")
 

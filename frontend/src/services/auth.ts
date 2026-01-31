@@ -21,8 +21,19 @@ export const authService = {
     name?: string
   ): Promise<{ user: any; token: string }> {
     try {
+      // Validate API URL
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      if (!apiUrl) {
+        throw {
+          status: 0,
+          code: "CONFIG_ERROR",
+          message: "API URL is not configured. Please check your environment variables.",
+          details: {},
+        };
+      }
+
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,
+        `${apiUrl}/auth/signup`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -54,6 +65,15 @@ export const authService = {
       }
       return { user: null, token: data.access_token };
     } catch (error: any) {
+      // Handle network errors specifically
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw {
+          status: 0,
+          code: "NETWORK_ERROR",
+          message: "Network error: Unable to reach the server. Please make sure the backend is running.",
+          details: {},
+        };
+      }
       throw error;
     }
   },
@@ -67,16 +87,31 @@ export const authService = {
     password: string
   ): Promise<{ user: any; token: string }> {
     try {
-      // Create form data for OAuth2PasswordRequestForm
-      const formData = new FormData();
-      formData.append('username', email);
-      formData.append('password', password);
+      // Validate API URL
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      if (!apiUrl) {
+        throw {
+          status: 0,
+          code: "CONFIG_ERROR",
+          message: "API URL is not configured. Please check your environment variables.",
+          details: {},
+        };
+      }
+
+      // Create form data for OAuth2PasswordRequestForm - use URLSearchParams instead of FormData
+      // because fetch with FormData sets the content-type header with a boundary that might cause issues
+      const params = new URLSearchParams();
+      params.append('username', email);
+      params.append('password', password);
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/signin`,
+        `${apiUrl}/auth/signin`,
         {
           method: "POST",
-          body: formData,
+          body: params,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
         }
       );
 
@@ -104,6 +139,15 @@ export const authService = {
       }
       return { user: null, token: data.access_token };
     } catch (error: any) {
+      // Handle network errors specifically
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw {
+          status: 0,
+          code: "NETWORK_ERROR",
+          message: "Network error: Unable to reach the server. Please make sure the backend is running.",
+          details: {},
+        };
+      }
       throw error;
     }
   },

@@ -545,7 +545,11 @@ export default function AdvancedDashboard() {
               onClick={toggleTheme}
               className={`flex items-center gap-3 p-3 rounded-lg ${theme === 'dark' ? 'hover:bg-gray-700 cursor-pointer' : 'hover:bg-gray-50 cursor-pointer'}`}
             >
-              {theme === 'dark' ? <Sun className={`w-5 h-5 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`} /> : <Moon className={`w-5 h-5 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`} />}
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-gray-300" />
+              ) : (
+                <Moon className="w-5 h-5 text-gray-600" />
+              )}
               <span className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Switch to {theme === 'dark' ? 'Light' : 'Dark'} Mode</span>
             </div>
             <div className={`flex items-center gap-3 p-3 rounded-lg ${theme === 'dark' ? 'hover:bg-gray-700 cursor-pointer' : 'hover:bg-gray-50 cursor-pointer'}`}>

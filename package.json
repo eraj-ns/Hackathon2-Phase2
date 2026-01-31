@@ -1,12 +1,14 @@
 {
-  "dependencies": {
-    "@radix-ui/react-checkbox": "^1.3.3",
-    "@radix-ui/react-slot": "^1.2.4",
-    "axios": "^1.13.3",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "lucide-react": "^0.563.0",
-    "sonner": "^2.0.7",
-    "tailwind-merge": "^3.4.0"
+  "name": "hackathon2-todo-app",
+  "version": "1.0.0",
+  "description": "Todo application with frontend and backend integration",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && python -m uvicorn main:app --reload --port 8000",
+    "build": "cd frontend && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
   }
 }

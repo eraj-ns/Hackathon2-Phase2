@@ -82,7 +82,11 @@ export default function SignInPage() {
             errorMessage = error;
           } else if (typeof error === 'object' && error !== null) {
             const errorObj = error as Record<string, unknown>;
-            if ('message' in errorObj && typeof errorObj.message === 'string') {
+
+            // Check for network errors specifically
+            if ('code' in errorObj && errorObj.code === 'NETWORK_ERROR') {
+              errorMessage = errorObj.message as string || 'Unable to connect to the server. Please make sure the backend is running.';
+            } else if ('message' in errorObj && typeof errorObj.message === 'string') {
               errorMessage = errorObj.message;
             } else if ('detail' in errorObj && typeof errorObj.detail === 'string') {
               errorMessage = errorObj.detail;
